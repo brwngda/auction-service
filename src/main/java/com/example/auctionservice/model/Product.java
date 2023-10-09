@@ -1,22 +1,10 @@
 package com.example.auctionservice.model;
 
-
-import java.time.LocalDateTime;
-
-class Product {
+public class Product {
     private Long id;
-    private String name;
+    private String title;
     private String description;
     private ProductCategory productCategory;
-    private Double minPrice;
-    private Double buyNow;
-    private boolean promoted;
-    private String location;
+    private ProductCondition productCondition;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime finishedAt;
-}
-
-class ProductCategory {
-    String name;
 }
