@@ -8,6 +8,8 @@ import java.util.List;
 
 @Service
 public class OfferService {
+
+    // coś mi nie działa Panie Konradzie
     private final OfferRepository offerRepository;
 
     public OfferService(OfferRepository offerRepository) {
