@@ -2,7 +2,7 @@ package com.example.auctionservice.model;
 
 import java.util.List;
 
-enum ProductCategory {
+public enum ProductCategory {
 
     AUTOMOTIVE,
     BEAUTY,

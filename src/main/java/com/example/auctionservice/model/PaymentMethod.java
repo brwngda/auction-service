@@ -1,6 +1,6 @@
 package com.example.auctionservice.model;
 
-enum PaymentMethod {
+public enum PaymentMethod {
     CASH,
     BLIK,
     TRANSFER;

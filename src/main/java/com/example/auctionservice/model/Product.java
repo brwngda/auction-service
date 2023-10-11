@@ -1,10 +1,32 @@
 package com.example.auctionservice.model;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Set;
+
+@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class Product {
+    @Id
+    @GeneratedValue
     private Long id;
     private String title;
     private String description;
-    private ProductCategory productCategory;
+    @Enumerated(EnumType.STRING)
     private ProductCondition productCondition;
+    @Enumerated(EnumType.STRING)
+    private ProductCategory productCategory;
 
+    public Product(String title, String description, ProductCondition productCondition, ProductCategory productCategory) {
+        this.title = title;
+        this.description = description;
+        this.productCondition = productCondition;
+        this.productCategory = productCategory;
+    }
 }

@@ -1,6 +1,6 @@
 package com.example.auctionservice.model;
 
-enum ProductCondition {
+public enum ProductCondition {
     NEW,
     USED,
     DAMAGED;
