@@ -29,6 +29,7 @@ public class Offer {
     private PaymentMethod paymentMethod;
 
     @CreationTimestamp
+    @Transient
     private LocalDateTime createdAt;
     private LocalDateTime finishedAt;
 
