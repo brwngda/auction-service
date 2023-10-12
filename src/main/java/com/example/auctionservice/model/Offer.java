@@ -1,12 +1,12 @@
 package com.example.auctionservice.model;
 
+import com.example.auctionservice.dto.OfferDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
-
 
 import java.time.LocalDateTime;
 
@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Offer {
     @Id
     @GeneratedValue
@@ -30,6 +31,16 @@ public class Offer {
     @CreationTimestamp
     private LocalDateTime createdAt;
     private LocalDateTime finishedAt;
+
+    public Offer(OfferDTO offerDTO) {
+        this.id = offerDTO.getId();
+        this.product = offerDTO.getProduct();
+        this.purchaseNotes = offerDTO.isPurchaseNotes();
+        this.price = offerDTO.getPrice();
+        this.promoted = offerDTO.isPromoted();
+        this.location = offerDTO.getLocation();
+        this.paymentMethod = offerDTO.getPaymentMethod();
+    }
 
     public Offer(Product product, boolean purchaseNotes, double price, boolean promoted, String location, PaymentMethod paymentMethod) {
         this.product = product;
