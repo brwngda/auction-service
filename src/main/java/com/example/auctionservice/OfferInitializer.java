@@ -23,7 +23,7 @@ public class OfferInitializer {
                 new Offer(new Product("Dupa", "description", ProductCondition.NEW, ProductCategory.AUTOMOTIVE),
                         false, 200, true, "Gdynia", PaymentMethod.CASH),
                 new Offer(new Product("Dupa", "description", ProductCondition.NEW, ProductCategory.AUTOMOTIVE),
-                        true, 100, false, "Gdynia", PaymentMethod.TRANSFER)
+                        true, 100, false, "Dupa", PaymentMethod.TRANSFER)
         ));
     }
 }
