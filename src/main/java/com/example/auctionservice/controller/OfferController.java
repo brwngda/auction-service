@@ -1,6 +1,6 @@
 package com.example.auctionservice.controller;
 
-import com.example.auctionservice.dto.CreateOfferRequest;
+import com.example.auctionservice.dto.OfferDTO;
 import com.example.auctionservice.model.Offer;
 import com.example.auctionservice.service.OfferService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,14 +29,14 @@ public class OfferController {
         log.info("Client sent request for offer with id: {}", id);
         return offerService.getOfferById(id);
     }
-//    CZEKA NA KONRADA
-//    @PostMapping
-//    Offer addOffers(@RequestBody CreateOfferRequest offer) {
-//        return offerService.createOffer(offer);
-//    }
+
+    @PostMapping
+    Offer addOffers(@RequestBody OfferDTO offerDTO) {
+        return offerService.createOffer(offerDTO);
+    }
 
     @PatchMapping("/{id}")
-    Offer updateOffer(@PathVariable Long id, @RequestBody Offer offer) {
-        return offerService.updateOffer(id, offer);
+    Offer updateOffer(@PathVariable Long id, @RequestBody OfferDTO offerDTO) {
+        return offerService.updateOffer(offerDTO);
     }
 }

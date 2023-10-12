@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateOfferRequest {
+public class OfferDTO {
+    private Long id;
     private Product product;
     private Boolean purchaseNotes;
     private Double price;
