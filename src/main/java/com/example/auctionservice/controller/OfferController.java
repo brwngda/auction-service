@@ -53,8 +53,9 @@ public class OfferController {
     }
 
     @ExceptionHandler(NoOfferFoundException.class)
-    private ResponseEntity<Object> mapNoSuchElementException(NoOfferFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    private ResponseEntity<Error> mapNoSuchElementException(NoOfferFoundException ex) {
+        return new ResponseEntity<>(
+//                new Error(HttpStatus.NOT_FOUND.value(), ex.getMessage()),
+                HttpStatus.NOT_FOUND);
     }
-
 }
