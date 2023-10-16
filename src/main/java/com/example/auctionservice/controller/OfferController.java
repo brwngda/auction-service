@@ -1,10 +1,13 @@
 package com.example.auctionservice.controller;
 
+import com.example.auctionservice.ExceptionHandler.NoOfferFoundException;
 import com.example.auctionservice.SortType;
 import com.example.auctionservice.dto.OfferDTO;
 import com.example.auctionservice.model.Offer;
 import com.example.auctionservice.service.OfferService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +43,7 @@ public class OfferController {
 
     @PatchMapping("/{id}")
     Offer updateOffer(@PathVariable Long id, @RequestBody OfferDTO offerDTO) {
-        return offerService.updateOffer(offerDTO);
+        return offerService.updateOffer(id, offerDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -48,4 +51,10 @@ public class OfferController {
         log.info("Client sent request to delete offer with id: {}", id);
         return offerService.deleteOffer(id);
     }
+
+    @ExceptionHandler(NoOfferFoundException.class)
+    private ResponseEntity<Object> mapNoSuchElementException(NoOfferFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
 }

@@ -34,14 +34,16 @@ public class OfferService {
         return offerRepository.save(entity);
     }
 
-    public Offer updateOffer(OfferDTO offerDTO) {
-        Long offerId = offerDTO.getId();
-        Offer updatedOffer = toEntity(offerId, offerDTO);
+    public Offer updateOffer(Long id, OfferDTO offerDTO) {
+        Offer offerToUpdate = offerRepository.findById(id)
+                .orElseThrow(()->new NoOfferFoundException(id));
+        Offer updatedOffer = toEntity(id, offerDTO);
         return offerRepository.save(updatedOffer);
     }
 
     public Offer deleteOffer(Long id) {
-        Offer offerFromDb = getOfferById(id);
+        Offer offerFromDb = offerRepository.findById(id)
+                .orElseThrow(() -> new NoOfferFoundException(id));
         offerRepository.delete(offerFromDb);
         return offerFromDb;
     }
