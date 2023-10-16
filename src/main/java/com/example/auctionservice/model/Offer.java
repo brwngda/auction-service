@@ -1,7 +1,10 @@
 package com.example.auctionservice.model;
 
+import com.example.auctionservice.AddOffer;
 import com.example.auctionservice.dto.OfferDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +25,11 @@ public class Offer {
     @OneToOne(cascade = CascadeType.ALL)
     private Product product;
     private boolean purchaseNotes;
+
     private double price;
     private boolean promoted;
+    @NotNull(groups = AddOffer.class)
+    @NotBlank(groups = AddOffer.class)
     private String location;
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
@@ -50,5 +56,7 @@ public class Offer {
         this.promoted = promoted;
         this.location = location;
         this.paymentMethod = paymentMethod;
+
     }
 }
+

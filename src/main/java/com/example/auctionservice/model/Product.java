@@ -1,6 +1,7 @@
 package com.example.auctionservice.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,4 +31,7 @@ public class Product implements Serializable {
         this.productCondition = productCondition;
         this.productCategory = productCategory;
     }
+
+    interface AddProduct{}
+    interface UpdateProduct{}
 }

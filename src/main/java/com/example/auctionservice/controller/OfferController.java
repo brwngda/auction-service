@@ -1,5 +1,6 @@
 package com.example.auctionservice.controller;
 
+import com.example.auctionservice.AddOffer;
 import com.example.auctionservice.ExceptionHandler.NoOfferFoundException;
 import com.example.auctionservice.SortType;
 import com.example.auctionservice.dto.OfferDTO;
@@ -8,6 +9,7 @@ import com.example.auctionservice.service.OfferService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +39,7 @@ public class OfferController {
     }
 
     @PostMapping
-    Offer addOffers(@RequestBody OfferDTO offerDTO) {
+    Offer addOffers(@Validated({AddOffer.class})@RequestBody OfferDTO offerDTO) {
         return offerService.createOffer(offerDTO);
     }
 
