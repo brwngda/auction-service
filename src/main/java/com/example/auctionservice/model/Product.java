@@ -17,15 +17,15 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    private String title;
+    private String name;
     private String description;
     @Enumerated(EnumType.STRING)
     private ProductCondition productCondition;
     @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
 
-    public Product(String title, String description, ProductCondition productCondition, ProductCategory productCategory) {
-        this.title = title;
+    public Product(String name, String description, ProductCondition productCondition, ProductCategory productCategory) {
+        this.name = name;
         this.description = description;
         this.productCondition = productCondition;
         this.productCategory = productCategory;

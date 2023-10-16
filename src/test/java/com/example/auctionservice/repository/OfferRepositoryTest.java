@@ -1,6 +1,5 @@
 package com.example.auctionservice.repository;
 
-import com.example.auctionservice.dto.OfferDTO;
 import com.example.auctionservice.model.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -42,7 +41,7 @@ class OfferRepositoryTest {
         //then
         assertTrue(result.isPresent());
         assertEquals(1L, result.get().getId());
-        assertEquals("Dupa", result.get().getProduct().getTitle());
+        assertEquals("Dupa", result.get().getProduct().getName());
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.auctionservice.controller;
 
+import com.example.auctionservice.SortType;
 import com.example.auctionservice.dto.OfferDTO;
 import com.example.auctionservice.model.Offer;
 import com.example.auctionservice.service.OfferService;
@@ -19,9 +20,11 @@ public class OfferController {
     }
 
     @GetMapping
-    List<Offer> getOffers() {
+    List<Offer> getOffers(@RequestParam(required = false) SortType sortType,
+                          @RequestParam(required = false) Integer page,
+                          @RequestParam(required = false) Integer size) {
         log.info("Client sent request to get offer list");
-        return offerService.getOffers();
+        return offerService.getOffers(sortType, page, size);
     }
 
     @GetMapping("/{id}")
