@@ -20,13 +20,13 @@ public class OfferController {
 
     @GetMapping
     List<Offer> getOffers() {
-        log.info("Client sent request for offer list");
+        log.info("Client sent request to get offer list");
         return offerService.getOffers();
     }
 
     @GetMapping("/{id}")
     Offer getOfferById(@PathVariable Long id) {
-        log.info("Client sent request for offer with id: {}", id);
+        log.info("Client sent request to get offer with id: {}", id);
         return offerService.getOfferById(id);
     }
 
@@ -38,5 +38,11 @@ public class OfferController {
     @PatchMapping("/{id}")
     Offer updateOffer(@PathVariable Long id, @RequestBody OfferDTO offerDTO) {
         return offerService.updateOffer(offerDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    Offer deleteOffer(@PathVariable Long id) {
+        log.info("Client sent request to delete offer with id: {}", id);
+        return offerService.deleteOffer(id);
     }
 }

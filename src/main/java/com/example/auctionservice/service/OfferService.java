@@ -34,4 +34,10 @@ public class OfferService {
         Offer updatedOffer = toEntity(offerId, offerDTO);
         return offerRepository.save(updatedOffer);
     }
+
+    public Offer deleteOffer(Long id) {
+        Offer offerFromDb = getOfferById(id);
+        offerRepository.delete(offerFromDb);
+        return offerFromDb;
+    }
 }
