@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Builder
 public class Product implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
@@ -32,6 +32,4 @@ public class Product implements Serializable {
         this.productCategory = productCategory;
     }
 
-    interface AddProduct{}
-    interface UpdateProduct{}
 }

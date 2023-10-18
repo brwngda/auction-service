@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Builder
 public class Offer {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne(cascade = CascadeType.ALL)
     private Product product;

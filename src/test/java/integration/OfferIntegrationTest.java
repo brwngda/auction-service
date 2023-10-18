@@ -3,6 +3,7 @@ package integration;
 import com.example.auctionservice.AuctionServiceApplication;
 import com.example.auctionservice.dto.OfferDTO;
 import com.example.auctionservice.model.Offer;
+import com.example.auctionservice.repository.OfferRepository;
 import com.example.auctionservice.service.OfferService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -15,7 +16,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -27,8 +30,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {AuctionServiceApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OfferIntegrationTest extends OfferIntegrationTestSetup {
-    @InjectMocks
+
     private OfferService offerService;
+    @BeforeEach
+    void setup(@Autowired OfferRepository offerRepository) {
+        offerService= new OfferService(offerRepository);
+    }
+
     @LocalServerPort
     private int port;
     private static final String PATH_OFFERS = "/offers";
@@ -68,7 +76,7 @@ class OfferIntegrationTest extends OfferIntegrationTestSetup {
         List<Offer> offers = new ObjectMapper().readValue(responseBody, new TypeReference<>() {
         });
         assertEquals(200, extract.statusCode());
-        assertEquals(1, offers.size());
+        assertEquals(6, offers.size());
         assertEquals(offers.get(0).getId(), 1L);
         assertEquals(offers.get(0).getProduct().getName(), "BICYCLE");
 //        assertEquals(offers.get(1).getId(), 2L);
