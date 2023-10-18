@@ -1,4 +1,4 @@
-package com.example.auctionservice.ExceptionHandler;
+package com.example.auctionservice.exception;
 
 public class NoOfferFoundException extends RuntimeException {
     public NoOfferFoundException(Long id) {

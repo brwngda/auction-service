@@ -1,7 +1,7 @@
 package com.example.auctionservice.service;
 
-import com.example.auctionservice.ExceptionHandler.NoOfferFoundException;
-import com.example.auctionservice.SortType;
+import com.example.auctionservice.exception.NoOfferFoundException;
+import com.example.auctionservice.model.SortType;
 import com.example.auctionservice.dto.OfferDTO;
 import com.example.auctionservice.model.Offer;
 import com.example.auctionservice.repository.OfferRepository;

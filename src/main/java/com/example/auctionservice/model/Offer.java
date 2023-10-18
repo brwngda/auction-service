@@ -1,6 +1,5 @@
 package com.example.auctionservice.model;
 
-import com.example.auctionservice.AddOffer;
 import com.example.auctionservice.dto.OfferDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -28,14 +27,13 @@ public class Offer {
 
     private double price;
     private boolean promoted;
-    @NotNull(groups = AddOffer.class)
-    @NotBlank(groups = AddOffer.class)
+    @NotNull
+    @NotBlank
     private String location;
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
     @CreationTimestamp
-    @Transient
     private LocalDateTime createdAt;
     private LocalDateTime finishedAt;
 
@@ -49,6 +47,7 @@ public class Offer {
         this.paymentMethod = offerDTO.getPaymentMethod();
     }
 
+    // przerobić na buildera
     public Offer(Product product, boolean purchaseNotes, double price, boolean promoted, String location, PaymentMethod paymentMethod) {
         this.product = product;
         this.purchaseNotes = purchaseNotes;

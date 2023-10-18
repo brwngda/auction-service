@@ -1,8 +1,7 @@
 package com.example.auctionservice.controller;
 
-import com.example.auctionservice.AddOffer;
-import com.example.auctionservice.ExceptionHandler.NoOfferFoundException;
-import com.example.auctionservice.SortType;
+import com.example.auctionservice.exception.NoOfferFoundException;
+import com.example.auctionservice.model.SortType;
 import com.example.auctionservice.dto.OfferDTO;
 import com.example.auctionservice.model.Offer;
 import com.example.auctionservice.service.OfferService;
@@ -13,6 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.example.auctionservice.adapter.OfferAdapter.toDto;
 
 @Slf4j
 @RequestMapping("/offers")
@@ -39,8 +40,8 @@ public class OfferController {
     }
 
     @PostMapping
-    Offer addOffers(@Validated({AddOffer.class})@RequestBody OfferDTO offerDTO) {
-        return offerService.createOffer(offerDTO);
+    OfferDTO addOffers(@RequestBody OfferDTO offerDTO) {
+        return toDto(offerService.createOffer(offerDTO));
     }
 
     @PatchMapping("/{id}")
