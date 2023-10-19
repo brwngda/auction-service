@@ -58,7 +58,9 @@ class OfferIntegrationTest extends OfferIntegrationTestSetup {
                 .extract();
 
         String string = extract.body().asString();
-        OfferDTO offerDTO = new ObjectMapper().readValue(string, new TypeReference<>() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules();
+        OfferDTO offerDTO = objectMapper.readValue(string, new TypeReference<>() {
         });
         Offer offerById = offerService.getOfferById(offerDTO.getId());
         assertEquals(offerDTO.getId(), offerById.getId());
@@ -72,9 +74,13 @@ class OfferIntegrationTest extends OfferIntegrationTestSetup {
                 .then()
                 .extract();
 
+
         String responseBody = extract.body().asPrettyString();
-        List<Offer> offers = new ObjectMapper().readValue(responseBody, new TypeReference<>() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules();
+        List<Offer> offers = objectMapper.readValue(responseBody, new TypeReference<>() {
         });
+
         assertEquals(200, extract.statusCode());
         assertEquals(6, offers.size());
         assertEquals(offers.get(0).getId(), 1L);
@@ -83,3 +89,5 @@ class OfferIntegrationTest extends OfferIntegrationTestSetup {
 //        assertEquals(offers.get(2).getId(), 3L);
     }
 }
+
+// endpoint gdzie podajesz id ogloszenia

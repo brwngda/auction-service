@@ -32,16 +32,16 @@ class OfferRepositoryTest {
     @Test
     void given_offer_repo_with_records_when_access_offer_by_id_then_item_with_provided_id_should_be_returned() {
         //given
-        testEntityManager.persist(new Offer((new Product("Dupa", "description", ProductCondition.NEW, ProductCategory.AUTOMOTIVE)),
-                true, 100D, false, "Gdynia", PaymentMethod.TRANSFER));
+        testEntityManager.persist(new Offer((new Product("Renault Megane", "Awesome car", ProductCondition.USED, ProductCategory.AUTOMOTIVE)),
+                true, 10000D, true, "Gdansk", PaymentMethod.CASH));
 
         //when
-        Optional<Offer> result = offerRepository.findById(1L);
+        Optional<Offer> result = offerRepository.findById(7L);
 
         //then
         assertTrue(result.isPresent());
-        assertEquals(1L, result.get().getId());
-        assertEquals("Dupa", result.get().getProduct().getName());
+        assertEquals(7L, result.get().getId());
+        assertEquals("Renault Megane", result.get().getProduct().getName());
     }
 
 }
