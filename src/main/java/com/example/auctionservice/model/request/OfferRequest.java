@@ -1,4 +1,4 @@
-package com.example.auctionservice.dto;
+package com.example.auctionservice.model.request;
 
 import com.example.auctionservice.model.Offer;
 import com.example.auctionservice.model.PaymentMethod;
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OfferDTO implements Serializable {
+public class OfferRequest implements Serializable {
     private long offerId;
     private Product product;
     private boolean purchaseNotes;
@@ -23,7 +23,7 @@ public class OfferDTO implements Serializable {
     private String location;
     private PaymentMethod paymentMethod;
 
-    public OfferDTO(Offer offer) {
+    public OfferRequest(Offer offer) {
         this.offerId = offer.getOfferId();
         this.product = offer.getProduct();
         this.purchaseNotes = offer.isPurchaseNotes();

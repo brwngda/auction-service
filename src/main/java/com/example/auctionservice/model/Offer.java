@@ -1,6 +1,6 @@
 package com.example.auctionservice.model;
 
-import com.example.auctionservice.dto.OfferDTO;
+import com.example.auctionservice.model.request.OfferRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Offer implements Serializable {
+public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long offerId;
@@ -38,18 +38,18 @@ public class Offer implements Serializable {
     private LocalDateTime createdAt;
     private LocalDateTime finishedAt;
     @ManyToOne
-    private User user;
+    private UserEntity userEntity;
 
-    public Offer(OfferDTO offerDTO) {
-        this.offerId = offerDTO.getOfferId();
-        this.product = offerDTO.getProduct();
-        this.purchaseNotes = offerDTO.isPurchaseNotes();
-        this.price = offerDTO.getPrice();
-        this.promoted = offerDTO.isPromoted();
-        this.location = offerDTO.getLocation();
-        this.paymentMethod = offerDTO.getPaymentMethod();
+    public Offer(OfferRequest offerRequest) {
+        this.offerId = offerRequest.getOfferId();
+        this.product = offerRequest.getProduct();
+        this.purchaseNotes = offerRequest.isPurchaseNotes();
+        this.price = offerRequest.getPrice();
+        this.promoted = offerRequest.isPromoted();
+        this.location = offerRequest.getLocation();
+        this.paymentMethod = offerRequest.getPaymentMethod();
     }
-
+//TODO  TEN KONSTRUKTOR ISTNIEJE WYŁĄCZNIE NA POTRZEBĘ TESTU???????????????????
     public Offer(Product product, boolean purchaseNotes, double price, boolean promoted, String location, PaymentMethod paymentMethod) {
         this.product = product;
         this.purchaseNotes = purchaseNotes;

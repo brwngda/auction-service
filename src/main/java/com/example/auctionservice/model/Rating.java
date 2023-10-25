@@ -23,5 +23,5 @@ public class Rating {
     private int rating;
     private boolean isSeller;
     @ManyToOne
-    private User user;
+    private UserEntity receiver;
 }

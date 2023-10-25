@@ -2,7 +2,7 @@ package com.example.auctionservice.service;
 
 import com.example.auctionservice.exception.NoOfferFoundException;
 import com.example.auctionservice.model.SortType;
-import com.example.auctionservice.dto.OfferDTO;
+import com.example.auctionservice.model.request.OfferRequest;
 import com.example.auctionservice.model.Offer;
 import com.example.auctionservice.repository.OfferRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,15 +29,15 @@ public class OfferService {
         return offerRepository.findById(id).orElseThrow(() -> new NoOfferFoundException(id));
     }
 
-    public Offer createOffer(OfferDTO offerDTO) {
-        Offer entity = toEntity(offerDTO);
+    public Offer createOffer(OfferRequest offerRequest) {
+        Offer entity = toEntity(offerRequest);
         return offerRepository.save(entity);
     }
 
-    public Offer updateOffer(Long id, OfferDTO offerDTO) {
+    public Offer updateOffer(Long id, OfferRequest offerRequest) {
         Offer offerToUpdate = offerRepository.findById(id)
                 .orElseThrow(()->new NoOfferFoundException(id));
-        Offer updatedOffer = toEntity(id, offerDTO);
+        Offer updatedOffer = toEntity(id, offerRequest);
         return offerRepository.save(updatedOffer);
     }
 

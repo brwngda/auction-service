@@ -1,13 +1,13 @@
 package integration;
 
-import com.example.auctionservice.dto.OfferDTO;
+import com.example.auctionservice.model.request.OfferRequest;
 import com.example.auctionservice.model.Product;
 import com.example.auctionservice.model.ProductCategory;
 
 class OfferIntegrationTestSetup {
 
-        OfferDTO createOfferDto(){
-            return OfferDTO.builder()
+        OfferRequest createOfferDto(){
+            return OfferRequest.builder()
                     .product(createProduct())
                     .price(200.0)
                     .build();

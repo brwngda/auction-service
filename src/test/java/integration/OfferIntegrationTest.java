@@ -1,7 +1,7 @@
 package integration;
 
 import com.example.auctionservice.AuctionServiceApplication;
-import com.example.auctionservice.dto.OfferDTO;
+import com.example.auctionservice.model.request.OfferRequest;
 import com.example.auctionservice.model.Offer;
 import com.example.auctionservice.repository.OfferRepository;
 import com.example.auctionservice.service.OfferService;
@@ -58,10 +58,10 @@ class OfferIntegrationTest extends OfferIntegrationTestSetup {
         String string = extract.body().asString();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
-        OfferDTO offerDTO = objectMapper.readValue(string, new TypeReference<>() {
+        OfferRequest offerRequest = objectMapper.readValue(string, new TypeReference<>() {
         });
-        Offer offerById = offerService.getOfferById(offerDTO.getOfferId());
-        assertEquals(offerDTO.getOfferId(), offerById.getOfferId());
+        Offer offerById = offerService.getOfferById(offerRequest.getOfferId());
+        assertEquals(offerRequest.getOfferId(), offerById.getOfferId());
     }
 
     @Test
