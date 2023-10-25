@@ -15,7 +15,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class OfferDTO implements Serializable {
-    private Long id;
+    private long offerId;
     private Product product;
     private boolean purchaseNotes;
     private Double price;
@@ -24,12 +24,11 @@ public class OfferDTO implements Serializable {
     private PaymentMethod paymentMethod;
 
     public OfferDTO(Offer offer) {
-        this.id = offer.getId();
+        this.offerId = offer.getOfferId();
         this.product = offer.getProduct();
         this.purchaseNotes = offer.isPurchaseNotes();
         this.price = offer.getPrice();
         this.promoted = offer.isPromoted();
-        this.location = offer.getLocation();
         this.paymentMethod = offer.getPaymentMethod();
     }
 }

@@ -40,7 +40,7 @@ class OfferRepositoryTest {
 
         //then
         assertTrue(result.isPresent());
-        assertEquals(7L, result.get().getId());
+        assertEquals(7L, result.get().getOfferId());
         assertEquals("Renault Megane", result.get().getProduct().getName());
     }
 

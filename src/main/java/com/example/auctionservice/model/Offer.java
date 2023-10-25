@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,10 +18,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Offer {
+public class Offer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long offerId;
     @OneToOne(cascade = CascadeType.ALL)
     private Product product;
     private boolean purchaseNotes;
@@ -36,9 +37,11 @@ public class Offer {
     @CreationTimestamp
     private LocalDateTime createdAt;
     private LocalDateTime finishedAt;
+    @ManyToOne
+    private User user;
 
     public Offer(OfferDTO offerDTO) {
-        this.id = offerDTO.getId();
+        this.offerId = offerDTO.getOfferId();
         this.product = offerDTO.getProduct();
         this.purchaseNotes = offerDTO.isPurchaseNotes();
         this.price = offerDTO.getPrice();
@@ -47,7 +50,6 @@ public class Offer {
         this.paymentMethod = offerDTO.getPaymentMethod();
     }
 
-    // przerobić na buildera
     public Offer(Product product, boolean purchaseNotes, double price, boolean promoted, String location, PaymentMethod paymentMethod) {
         this.product = product;
         this.purchaseNotes = purchaseNotes;

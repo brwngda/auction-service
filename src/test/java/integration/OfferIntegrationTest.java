@@ -15,10 +15,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -62,8 +60,8 @@ class OfferIntegrationTest extends OfferIntegrationTestSetup {
         objectMapper.findAndRegisterModules();
         OfferDTO offerDTO = objectMapper.readValue(string, new TypeReference<>() {
         });
-        Offer offerById = offerService.getOfferById(offerDTO.getId());
-        assertEquals(offerDTO.getId(), offerById.getId());
+        Offer offerById = offerService.getOfferById(offerDTO.getOfferId());
+        assertEquals(offerDTO.getOfferId(), offerById.getOfferId());
     }
 
     @Test
@@ -83,7 +81,7 @@ class OfferIntegrationTest extends OfferIntegrationTestSetup {
 
         assertEquals(200, extract.statusCode());
         assertEquals(6, offers.size());
-        assertEquals(offers.get(0).getId(), 1L);
+        assertEquals(offers.get(0).getOfferId(), 1L);
         assertEquals(offers.get(0).getProduct().getName(), "BICYCLE");
 //        assertEquals(offers.get(1).getId(), 2L);
 //        assertEquals(offers.get(2).getId(), 3L);

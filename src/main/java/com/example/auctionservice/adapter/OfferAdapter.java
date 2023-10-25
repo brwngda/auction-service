@@ -17,7 +17,7 @@ public final class OfferAdapter {
 
     public static Offer toEntity(Long id, OfferDTO offerDTO){
         Offer entity = toEntity(offerDTO);
-        entity.setId(id);
+        entity.setOfferId(id);
         return entity;
     }
 }
