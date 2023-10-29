@@ -1,6 +1,7 @@
 package com.example.auctionservice.controller;
 
 import com.example.auctionservice.exception.NoOfferFoundException;
+import com.example.auctionservice.model.PaymentMethod;
 import com.example.auctionservice.model.SortType;
 import com.example.auctionservice.model.request.OfferRequest;
 import com.example.auctionservice.model.Offer;
@@ -23,11 +24,20 @@ public class OfferController {
     private final OfferService offerService;
 
     @GetMapping
-    List<Offer> getOffers(@RequestParam(required = false) SortType sortType,
+    List<Offer> getOffers(@RequestParam(required = false) String productName,
+                          @RequestParam(required = false) SortType sortType,
                           @RequestParam(required = false) Integer page,
                           @RequestParam(required = false) Integer size) {
         log.info("Client sent request to get offer list");
-        return offerService.getOffers(sortType, page, size);
+        return offerService.getOffers(productName, sortType, page, size);
+    }
+
+    @GetMapping("/category")
+    List<Offer> getOfferByPaymentMethod(@RequestParam PaymentMethod paymentMethod,
+                                        @RequestParam(required = false) SortType sortType,
+                                        @RequestParam(required = false) Integer page,
+                                        @RequestParam(required = false) Integer size) {
+        return offerService.getOffersByPaymentMethod(paymentMethod, sortType, page, size);
     }
 
     @GetMapping("/{id}")
@@ -51,7 +61,8 @@ public class OfferController {
         log.info("Client sent request to delete offer with id: {}", id);
         return offerService.deleteOffer(id);
     }
-//TODO: cos tu nie gra z ta zakomentowana linijka.
+
+    //TODO: cos tu nie gra z ta zakomentowana linijka.
     @ExceptionHandler(NoOfferFoundException.class)
     private ResponseEntity<Error> mapNoSuchElementException(NoOfferFoundException ex) {
         return new ResponseEntity<>(

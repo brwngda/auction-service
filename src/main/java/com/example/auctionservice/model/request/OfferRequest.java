@@ -17,18 +17,18 @@ import java.io.Serializable;
 public class OfferRequest implements Serializable {
     private long offerId;
     private Product product;
-    private boolean purchaseNotes;
+    private boolean isPurchaseNote;
     private Double price;
-    private boolean promoted;
+    private boolean isPromoted;
     private String location;
     private PaymentMethod paymentMethod;
 
     public OfferRequest(Offer offer) {
         this.offerId = offer.getOfferId();
         this.product = offer.getProduct();
-        this.purchaseNotes = offer.isPurchaseNotes();
+        this.isPurchaseNote = offer.isPurchaseNote();
         this.price = offer.getPrice();
-        this.promoted = offer.isPromoted();
+        this.isPromoted = offer.isPromoted();
         this.paymentMethod = offer.getPaymentMethod();
     }
 }

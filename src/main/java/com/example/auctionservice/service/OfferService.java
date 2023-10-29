@@ -1,6 +1,8 @@
 package com.example.auctionservice.service;
 
 import com.example.auctionservice.exception.NoOfferFoundException;
+import com.example.auctionservice.model.PaymentMethod;
+import com.example.auctionservice.model.ProductCategory;
 import com.example.auctionservice.model.SortType;
 import com.example.auctionservice.model.request.OfferRequest;
 import com.example.auctionservice.model.Offer;
@@ -20,8 +22,19 @@ import static com.example.auctionservice.adapter.OfferAdapter.toEntity;
 public class OfferService {
     private final OfferRepository offerRepository;
 
-    public List<Offer> getOffers(SortType sortType, Integer page, Integer size) {
+    public List<Offer> getOffers(String productName, SortType sortType, Integer page, Integer size) {
         Pageable pageable = providePageable(page, size, sortType);
+        if (productName != null) {
+            return offerRepository.findAllByProductName(productName);
+        }
+        return offerRepository.findAll(pageable).toList();
+    }
+
+    public List<Offer> getOffersByPaymentMethod(PaymentMethod paymentMethod, SortType sortType, Integer page, Integer size) {
+        Pageable pageable = providePageable(page, size, sortType);
+        if (paymentMethod != null) {
+            return offerRepository.findAllByPaymentMethod(paymentMethod, pageable);
+        }
         return offerRepository.findAll(pageable).toList();
     }
 
@@ -36,7 +49,7 @@ public class OfferService {
 
     public Offer updateOffer(Long id, OfferRequest offerRequest) {
         Offer offerToUpdate = offerRepository.findById(id)
-                .orElseThrow(()->new NoOfferFoundException(id));
+                .orElseThrow(() -> new NoOfferFoundException(id));
         Offer updatedOffer = toEntity(id, offerRequest);
         return offerRepository.save(updatedOffer);
     }

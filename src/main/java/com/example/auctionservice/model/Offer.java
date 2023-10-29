@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,10 +23,10 @@ public class Offer {
     private long offerId;
     @OneToOne(cascade = CascadeType.ALL)
     private Product product;
-    private boolean purchaseNotes;
+    private boolean isPurchaseNote;
 
     private double price;
-    private boolean promoted;
+    private boolean isPromoted;
     @NotNull
     @NotBlank
     private String location;
@@ -43,18 +42,18 @@ public class Offer {
     public Offer(OfferRequest offerRequest) {
         this.offerId = offerRequest.getOfferId();
         this.product = offerRequest.getProduct();
-        this.purchaseNotes = offerRequest.isPurchaseNotes();
+        this.isPurchaseNote = offerRequest.isPurchaseNote();
         this.price = offerRequest.getPrice();
-        this.promoted = offerRequest.isPromoted();
+        this.isPromoted = offerRequest.isPromoted();
         this.location = offerRequest.getLocation();
         this.paymentMethod = offerRequest.getPaymentMethod();
     }
 //TODO  TEN KONSTRUKTOR ISTNIEJE WYŁĄCZNIE NA POTRZEBĘ TESTU???????????????????
-    public Offer(Product product, boolean purchaseNotes, double price, boolean promoted, String location, PaymentMethod paymentMethod) {
+    public Offer(Product product, boolean isPurchaseNote, double price, boolean isPromoted, String location, PaymentMethod paymentMethod) {
         this.product = product;
-        this.purchaseNotes = purchaseNotes;
+        this.isPurchaseNote = isPurchaseNote;
         this.price = price;
-        this.promoted = promoted;
+        this.isPromoted = isPromoted;
         this.location = location;
         this.paymentMethod = paymentMethod;
 
