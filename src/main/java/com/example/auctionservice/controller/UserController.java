@@ -1,7 +1,6 @@
 package com.example.auctionservice.controller;
 
 import com.example.auctionservice.model.UserEntity;
-import com.example.auctionservice.model.request.UserRequest;
 import com.example.auctionservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.example.auctionservice.adapter.UserAdapter.toDto;
 
 @Slf4j
 @RequestMapping("/users")
@@ -31,15 +29,15 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping
-    UserRequest addUser(@RequestBody UserRequest userRequest) {
-        return toDto(userService.createUser(userRequest));
-    }
-
-    @PatchMapping("/{id}")
-    UserEntity updateUser(@PathVariable Long id, @RequestBody UserRequest userRequest) {
-        return userService.updateUser(id, userRequest);
-    }
+//    @PostMapping
+//    UserRequest addUser(@RequestBody UserRequest userRequest) {
+//        return toDto(userService.createUser(userRequest));
+//    }
+//
+//    @PatchMapping("/{id}")
+//    UserEntity updateUser(@PathVariable Long id, @RequestBody UserRequest userRequest) {
+//        return userService.updateUser(id, userRequest);
+//    }
 
     @DeleteMapping("/{id}")
     UserEntity deleteUser(@PathVariable Long id) {
